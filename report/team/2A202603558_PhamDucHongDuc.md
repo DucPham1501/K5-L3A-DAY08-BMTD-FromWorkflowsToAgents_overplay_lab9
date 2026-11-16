@@ -37,7 +37,7 @@ python -m lab8.check_submission
 | orchestrator | 1.000 | 1.000 | 0.000000 | 1.000–1.000 | 48.42 |
 | swarm | 0.986 | 0.929 | 0.000816 | 0.929–1.000 | 49.57 |
 
-- Run id dẫn chứng: `R-workflow-C-002-s55` (đúng) và `R-swarm-C-002-s55` (swarm fail, `status resolved != denied`), cả hai trong `src/reports/benchmark.json`.
+- Run id dẫn chứng: `R-workflow-C-002-s55` (đúng) và `R-swarm-C-002-s55` (swarm fail, `status resolved != denied`), cả hai đều trong `src/reports/benchmark.json`.
 - Ablation: `src/reports/ablation_workflow_vs_orchestrator.json`, so với `src/reports/benchmark.json`.
 - Commit hash: chưa có khi viết báo cáo này; ghi hash thật sau khi commit.
 
