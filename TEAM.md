@@ -11,7 +11,7 @@
 
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
-|   1 |        |      |       |        |         |
+|   1 | Nguyễn Văn Minh | 2A202603551 | Chưa cập nhật | Chưa cập nhật | CP1: setup; CP4: crash, approval và security tests |
 |   2 |        |      |       |        |         |
 
 Gợi ý chia vai:
