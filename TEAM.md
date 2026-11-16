@@ -11,7 +11,7 @@
 
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
-|   1 | Nguyễn Văn Minh | 2A202603551 | Chưa cập nhật | Chưa cập nhật | CP1: setup; CP4: crash, approval và security tests |
+|   1 | Nguyễn Văn Minh | 2A202603551 | minhvjjp@gmail.com | https://github.com/killy-mv/ | CP1: setup; CP4: crash, approval và security tests |
 |   2 |        |      |       |        |         |
 
 Gợi ý chia vai:
@@ -25,7 +25,7 @@ Gợi ý chia vai:
 
 | Người | Vai | Commit | Test đã thêm hoặc sửa |
 | --- | --- | --- | --- |
-| | | | |
+| Nguyễn Văn Minh (2A202603551) | CP1: setup; CP4: security, approval, crash testing | `78cc2a0` (đã push `NguyenVanMinh`) | `src/tests/test_cp4_security.py` (42 test) |
 
 ## Cá nhân
 
