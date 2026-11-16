@@ -4,8 +4,8 @@
 
 - Họ tên: Nguyễn Văn Minh
 - MSSV: 2A202603551
-- Email: Chưa cập nhật
-- GitHub: Chưa cập nhật
+- Email: minhvjjp@gmail.com
+- GitHub: https://github.com/killy-mv/
 - Branch làm việc: `NguyenVanMinh`
 
 ## 2. Phần việc phụ trách
@@ -70,7 +70,20 @@ Lệnh được chạy trong `src/` với interpreter trong `.venv`:
 | Student suite | 248 passed, 109 deselected |
 | Crash suite chính thức | `crash_safety 20/20`, không có failed scenario |
 
-Giới hạn: kết quả chỉ xác nhận test local/public; chưa thể khẳng định pass toàn bộ hidden grader. File JSON do CLI sinh ra, không chỉnh tay. Chưa commit/push, cần ghi hash thật vào `TEAM.md` sau khi commit kỹ thuật.
+Giới hạn: kết quả chỉ xác nhận test local/public; chưa thể khẳng định pass toàn bộ hidden grader. File JSON do CLI sinh ra, không chỉnh tay. Toàn bộ kết quả CP4 đã được commit và push lên branch `NguyenVanMinh` trong commit `78cc2a0`.
+
+## 4.2. Bằng chứng commit và push
+
+| Mốc | Commit | Trạng thái | Ghi chú |
+| --- | --- | --- | --- |
+| CP1 — setup và baseline | Không có commit kỹ thuật riêng | Hoàn thành tại môi trường local | Thư mục `src/.venv` bị `.gitignore` bỏ qua, không đưa vào Git |
+| CP2 — nhận code từ Duy Bô | `e9f6961` | Đã merge vào `NguyenVanMinh` | Commit của thành viên phụ trách CP2, không tính là code do cá nhân tự viết |
+| CP4 — test và bằng chứng | `78cc2a0` (`78cc2a03c7f726e784caf8c00f2be12da3b3f1a2`) | **Đã commit và push** lên `origin/NguyenVanMinh` | Chứa file test, `src/reports/crash.json`, báo cáo cá nhân và `TEAM.md` |
+
+- Commit CP4: https://github.com/ha1tuan/K5-Day8-BMTD-From-Workflows-to-Agents/commit/78cc2a03c7f726e784caf8c00f2be12da3b3f1a2
+- Test đóng góp riêng: `src/tests/test_cp4_security.py` (42 test PASS).
+- Branch GitHub: https://github.com/ha1tuan/K5-Day8-BMTD-From-Workflows-to-Agents/tree/NguyenVanMinh
+- Ở thời điểm đối chiếu: commit `HEAD` và `origin/NguyenVanMinh` cùng là `78cc2a0`. Những thay đổi chỉnh sửa báo cáo sau đó cần được commit/push riêng để xuất hiện trên GitHub.
 
 ## 5. Công cụ AI đã dùng
 
@@ -80,5 +93,5 @@ Giới hạn: kết quả chỉ xác nhận test local/public; chưa thể khẳ
 ## 6. Tự đánh giá và việc còn thiếu
 
 - Hoàn thành phần kỹ thuật của CP1: môi trường chạy được, smoke và host suite xanh.
-- `TEAM.md` vẫn cần tên nhóm, repo nộp, email/GitHub và phân công/đóng góp của các thành viên khác.
+- Thông tin cá nhân và đóng góp CP4 đã được cập nhật trong `TEAM.md`; các thông tin nhóm và thành viên khác do nhóm thống nhất, bổ sung.
 - CP2 đã được tích hợp từ branch `duybo`; CP3 và CP4 đạt kiểm thử local. CP5 chưa triển khai: cần benchmark và hoàn thiện báo cáo nhóm bằng kết quả thực tế.
