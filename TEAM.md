@@ -11,7 +11,7 @@
 
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
-|   1 |        |      |       |        |         |
+|   1 | Vu Hai Tuan | 2A202603689 | 26ai.tuanvh3@vinuni.edu.vn      | ha1tuan | CP2: shape workflow, single, orchestrator |
 |   2 |        |      |       |        |         |
 
 Gợi ý chia vai:
@@ -25,7 +25,7 @@ Gợi ý chia vai:
 
 | Người | Vai | Commit | Test đã thêm hoặc sửa |
 | --- | --- | --- | --- |
-| | | | |
+| Vu Hai Tuan (2A202603689) | CP2: workflow, single, orchestrator | `e9f6961` | `src/tests/test_cp2_shapes.py` (5 test) |
 
 ## Cá nhân
 
