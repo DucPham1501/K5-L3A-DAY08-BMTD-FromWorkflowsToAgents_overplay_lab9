@@ -4,8 +4,14 @@
 
 - Tên nhóm: BMTD
 - Lớp: L3A
-- Repo nhóm: `K5-L3A-DAY08-BMTD-FromWorkflowsToAgents` (xem [SUBMISSION.md](SUBMISSION.md))
-- URL repo, nhánh nộp, commit chốt:
+
+**Repo nhóm:** K5-L3A-DAY08-BMTD-FromWorkflowsToAgents (xem SUBMISSION.md)
+
+| URL repo | Nhánh nộp | Commit chốt |
+|---|---|---|
+| https://github.com/ha1tuan/K5-L3A-DAY08-BMTD-FromWorkflowsToAgents | main | complete lab 8 |
+
+
 
 ## Thành viên
 
