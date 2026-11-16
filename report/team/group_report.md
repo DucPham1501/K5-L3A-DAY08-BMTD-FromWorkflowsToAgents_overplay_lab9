@@ -100,9 +100,9 @@ Benchmark lấy từ `src/reports/benchmark.json`, với các biến được gi
 - **Trial duy nhất fail:** `R-swarm-C-002-s55`, lý do `status resolved != denied`. Ở seed 55, swarm tin số "trễ 5 ngày" trong ticket, trong khi order ghi 2 ngày. Workflow ở cùng seed vẫn đúng (`R-workflow-C-002-s55`).
 - **Crash safety:** `20/20` (`src/reports/crash.json`).
 - **Test của nhóm:**
-  - Cổng host trên nhánh tích hợp: 128 passed.
+  - Cổng host trên `main` sau khi merge đủ các nhánh: 139 passed.
   - Ma trận student: 248/248.
-  - Test thêm theo từng checkpoint: CP2 (13 test), CP3 (19 test), CP4 (42 test), CP5 (`test_cp5_benchmark.py`).
+  - Test thêm theo từng checkpoint: CP2 (13 test), CP3 (19 test), CP4 (42 test), CP5 (11 test).
 - **`python -m lab8.check_submission`:** 0 FAIL.
 - **Tự kiểm kiểu hidden:** nhóm chưa có `student_drop/` nên chưa chạy self-check chính thức. Bộ thay thế là 24 claim tự dựng theo các kiểu đề nêu (ticket nói dối, injection, homoglyph, approval hỏng/mượn/hết hạn, đơn đã hoàn, policy cũ…), nhãn viết tay theo `business_rules.md`, chấm bằng `lab8.metrics.trial_pass` trên 5 seed:
   - workflow, single, orchestrator: 120/120;
@@ -125,7 +125,7 @@ Quyết định kiến trúc và lý do: xem `report/team/decision_adr.md`. Nhó
 | Review code phát hiện shape có thể ném exception (lỗi SQLite, `HandoffError`…) trong khi contract cấm | Báo cáo của reviewer theo spec trích dòng contract: "`run_claim` không được ném exception" | Bọc `run_claim`: `InjectedCrash` vẫn `raise`, lỗi khác trả `failed` kèm trace; thêm `test_broken_store_returns_failed_instead_of_raising` |
 | Test đầu tiên xanh ngay, chưa chắc nó bắt được lỗi | — | Chạy test injection trên swarm: fail đúng (`assert 'resolved' == 'denied'`), chứng tỏ test phân biệt được shape tin ticket với shape không tin |
 | Merge nhánh làm mất dữ liệu `TEAM.md`: bản trên `haituan` đè bảng đóng góp 4 dòng của `duybo` | `git show origin/duybo:TEAM.md` có 4 dòng, HEAD chỉ còn 1 | Viết lại `TEAM.md` từ báo cáo cá nhân và lịch sử git; `check_submission` → `bảng đóng góp có 4 thành viên` |
-| Commit test CP5 `bbb4d01` mới nằm trên `origin/hongduc`, chưa merge vào nhánh nộp | `git branch -a --contains bbb4d01` → chỉ `remotes/origin/hongduc` | Cần merge `origin/hongduc` trước khi chốt commit nộp |
+| Commit test CP5 `bbb4d01` lúc đầu chỉ nằm trên `origin/hongduc`, chưa có trong nhánh tích hợp | `git branch -a --contains bbb4d01` → chỉ `remotes/origin/hongduc` | Merge `origin/hongduc` vào `main` (`67d2761`); `pytest -q tests/test_cp5_benchmark.py` → 11 passed |
 
 ## 6. Tổng hợp đóng góp
 
@@ -133,7 +133,7 @@ Chi tiết đóng góp của từng thành viên nằm trong `TEAM.md` (bảng �
 - `report/team/2A202603689_VuHaiTuan.md`: CP2, ba shape (`e9f6961`, `test_cp2_shapes.py`).
 - `report/team/2A202603591_DoDuyBo.md`: CP3 và tích hợp nhánh (`2ee89e0`, `test_cp3_handoff_idempotency.py`).
 - `report/team/2A202603551_NguyenVanMinh.md`: CP1 và CP4 (`78cc2a0`, `test_cp4_security.py`).
-- `report/team/2A202603558_PhamDucHongDuc.md`: CP5 (`357432f`, `bbb4d01`, `test_cp5_benchmark.py`).
+- `report/team/2A202603558_PhamDucHongDuc.md`: CP5, gồm benchmark, ablation R4, ADR và research card (`357432f`, `bbb4d01`, `3eb91aa`, `test_cp5_benchmark.py` 11 test).
 
 ## 7. Hạn chế và hướng cải thiện
 

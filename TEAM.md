@@ -30,7 +30,7 @@ Gợi ý chia vai:
 | Vũ Hải Tuấn (2A202603689) | CP2: ba shape workflow, single, orchestrator | `e9f6961` | `src/tests/test_cp2_shapes.py` (13 test) |
 | Đỗ Duy Bộ (2A202603591) | CP3: handoff, idempotency, crash; tích hợp nhánh | `2ee89e0`, `820e659`, `67294a7`, `5552e25`, `e0536db` | `src/tests/test_cp3_handoff_idempotency.py` (19 test) |
 | Nguyễn Văn Minh (2A202603551) | CP1: setup; CP4: security, approval, crash testing | `78cc2a0`, `499188e` | `src/tests/test_cp4_security.py` (42 test) |
-| Phạm Đức Hồng Đức (2A202603558) | CP5: benchmark, ablation, ADR, research card | `357432f`, `bbb4d01` | `src/tests/test_cp5_benchmark.py` |
+| Phạm Đức Hồng Đức (2A202603558) | CP5: benchmark, ablation, ADR, research card | `357432f`, `bbb4d01`, `3eb91aa` | `src/tests/test_cp5_benchmark.py` (11 test) |
 
 ## Cá nhân
 
@@ -121,18 +121,37 @@ Báo cáo chi tiết của từng thành viên nằm trong `report/team/`. Tóm 
 
 ### Phần việc phụ trách
 
-- CP5: benchmark 4 shape, ablation, quyết định kiến trúc, ADR và research card.
+- CP5: benchmark, quyết định kiến trúc và báo cáo. Gồm benchmark 4 shape, ablation R4, `decision_adr.md` và `research_card.md`.
 
 ### Đóng góp cụ thể
 
-- Chạy benchmark 4 shape × 14 claim × 5 seed, sinh `src/reports/benchmark.json`.
-- Chọn `workflow`: ba shape của nhóm cùng pass 1.000 trên bộ public, nên chọn theo cost/success thấp nhất (28.77 VND mô phỏng).
-- Ablation R4 workflow với orchestrator, sinh `src/reports/ablation_workflow_vs_orchestrator.json`. Cost của orchestrator gấp 1.68 lần workflow, phần chênh chủ yếu do số lần gọi tool.
-- Điền `decision_adr.md` và `research_card.md`.
-- Test `test_cp5_benchmark.py`: kiểm bằng chứng benchmark và ablation đã commit.
+- **Benchmark chính thức:** chạy 4 shape × 14 claim × 5 seed (11, 22, 33, 44, 55), sinh `src/reports/benchmark.json`.
+- **Quyết định kiến trúc: chọn `workflow`.**
+  - `workflow`, `single`, `orchestrator` đều pass 1.000 trên bộ public, nên cost/success là chênh lệch duy nhất: workflow 28.77, single 30.10, orchestrator 48.42, swarm 49.57 VND mô phỏng.
+  - Nhóm chọn theo nguyên tắc: shape ít tự chủ nhất mà vẫn làm được việc.
+- **Ablation R4** (workflow so với orchestrator, chỉ đổi shape): sinh `src/reports/ablation_workflow_vs_orchestrator.json`.
+  - Số liệu tái lập đúng với `benchmark.json`, nên chênh lệch không đến từ seed.
+  - Cost của orchestrator gấp 1.68 lần workflow; khoảng 94% phần chênh đến từ số lần gọi tool (4.64 so với 2.79 lần/trial).
+- **ADR và research card:**
+  - `decision_adr.md`: điền các dòng nhãn mà máy chấm đọc, cùng 4 đoạn giải thích.
+  - `research_card.md`: phiếu R4 và kết quả ablation.
+- **Test `src/tests/test_cp5_benchmark.py` (11 test):**
+  - `benchmark.json` đủ 4 shape × 5 seed × 14 claim;
+  - ba shape của nhóm pass 1.000;
+  - swarm chỉ fail C-002 ở seed 55;
+  - workflow có cost thấp nhất;
+  - ADR ghi đúng shape và cost;
+  - ablation tái lập đúng số của benchmark.
 
 ### Bằng chứng
 
-- Commit `357432f`, `bbb4d01`.
-- Run id `R-workflow-C-002-s55` (đúng) và `R-swarm-C-002-s55` (swarm fail), cả hai trong `src/reports/benchmark.json`.
+- **Commit:**
+  - `357432f`: benchmark, ablation, ADR, research card;
+  - `bbb4d01`: test CP5;
+  - `3eb91aa`: cập nhật báo cáo.
+  
+  Cả ba đã được merge vào `main` (`67d2761`).
+- `python -m pytest -q tests/test_cp5_benchmark.py`: 11 passed.
+- **Run id dẫn chứng:** `R-workflow-C-002-s55` (đúng) và `R-swarm-C-002-s55` (swarm fail, `status resolved != denied`), cả hai trong `src/reports/benchmark.json`.
+- **Đối chiếu:** số trong ADR và research card khớp `by_shape` của `benchmark.json`; grep `src/traces/` không thấy `CANARY_SECRET_*` hay `CANARY_INTERNAL_*`.
 - Chi tiết: [report/team/2A202603558_PhamDucHongDuc.md](report/team/2A202603558_PhamDucHongDuc.md).
