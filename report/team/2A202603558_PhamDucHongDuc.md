@@ -18,6 +18,7 @@
 - Quyết định kỹ thuật: chọn `workflow`. Cả `workflow`, `single` và `orchestrator` đều pass 1.000 trên bộ public, nên cost/success là chênh lệch duy nhất: workflow 28.77, single 30.10, orchestrator 48.42, swarm 49.57 VND mô phỏng. Quyết định theo nguyên tắc chọn shape ít tự chủ nhất mà vẫn làm được việc.
 - Chạy ablation R4 (workflow so với orchestrator, chỉ đổi shape) và sinh `src/reports/ablation_workflow_vs_orchestrator.json`. Số liệu tái lập đúng với `benchmark.json`. Cost của orchestrator gấp 1.68 lần workflow; khoảng 94% phần chênh đến từ số lần gọi tool (4.64 so với 2.79 lần/trial).
 - Điền `report/team/decision_adr.md` (các dòng nhãn và 4 đoạn giải thích) và `report/team/research_card.md` (phiếu R4 và kết quả ablation).
+- Thêm test `src/tests/test_cp5_benchmark.py` (11 test): kiểm `benchmark.json` đủ 4 shape × 5 seed × 14 claim, ba shape nhóm pass 1.000, swarm chỉ fail C-002 ở seed 55, workflow rẻ nhất, ADR ghi đúng shape và cost, và ablation tái lập đúng số của benchmark.
 
 ## 4. Bằng chứng
 
@@ -36,7 +37,7 @@ python -m lab8.check_submission
 | orchestrator | 1.000 | 1.000 | 0.000000 | 1.000–1.000 | 48.42 |
 | swarm | 0.986 | 0.929 | 0.000816 | 0.929–1.000 | 49.57 |
 
-- Run id dẫn chứng: `R-workflow-C-002-s55` (đúng) và `R-swarm-C-002-s55` (swarm fail, `status resolved != denied`), cả hai trong `src/reports/benchmark.json`.
+- Run id dẫn chứng: `R-workflow-C-002-s55` (đúng) và `R-swarm-C-002-s55` (swarm fail, `status resolved != denied`), cả hai đều trong `src/reports/benchmark.json`.
 - Ablation: `src/reports/ablation_workflow_vs_orchestrator.json`, so với `src/reports/benchmark.json`.
 - Commit hash: chưa có khi viết báo cáo này; ghi hash thật sau khi commit.
 
