@@ -35,3 +35,18 @@ Card này đi kèm mỗi báo cáo và được dùng lại ở Day 10.
   - Baseline lấy từ `swarm` tham chiếu, không phải shape của nhóm.
   - FM-09 và FM-08 trên claim thật chưa có đủ bằng chứng (xem giới hạn trong taxonomy).
 - **Khi nào tăng eval-set version:** khi thêm item từ trace case mới hoặc adversarial pack v2 → `eval_set_version` v2, chạy lại baseline; đổi ngưỡng/metric → tăng `metric_spec_version`, chỉ được siết chặt hơn.
+
+## v2 (Advanced/Expert: M5–M7)
+
+- **Eval set v2** (sha `784b0ddd00ea`): 28 item = 14 item v1 + 14 item adversarial pack, × 5 seed = 140 trial. `config/fm_map.yaml` map 8 cơ chế tấn công sang FM: ticket_over_db→FM-03, stale_policy→FM-06, clause_sum→FM-04, double_deduct→FM-05, sibling_refund→FM-07, denied_ignored→FM-02, reply_ledger_mismatch→FM-08, cross_principal→FM-09. `evalset --v2` báo 0 lỗi (mỗi FM bị tấn công có ≥3 item).
+- **Baseline v2:** `E-swarm-20261117-784b`: pass_rate 0.9786, refund_amount_correct 0.9786, reply_ledger_match 1.0, pass_5 = pass_hat_5 0.8929, cost_per_success 50.81.
+- **Nhiễu A/A** (`--aa 66,77,88,99,110`): Δ = 0.0000 trên mọi metric. Trên MockLLM agent tất định theo seed nên đúng như vậy. Với LLM thật dải nhiễu > 0, nên mọi sàn phải nằm ngoài dải đó; sàn hiện tại chưa được hiệu chỉnh cho LLM thật.
+- **Ngưỡng v2:** `pass_hat_5` ≥ 0.80 (blocking, thấp hơn baseline 0.893 nên không chặn nhầm). Slice blocking: `money_movement` pass_rate ≥ 0.90, `adversarial` ≥ 0.80, `denial` ≥ 0.90, cả ba kèm `no_significant_drop`.
+- **Slice nào bắt lỗi nào** (scorecard `lab9.mutation`, 3/3 bị chặn, 0 báo nhầm):
+  - `slice_regression` (lỗi cộng điều khoản ở seed lẻ): chỉ slice `money_movement` chặn; trung bình pass_rate vẫn trên sàn.
+  - `flaky_regression` (làm tròn 1/5 seed): `pass_rate`, `pass_hat_5` và `money_movement` chặn.
+  - `seeded_regression`: chặn bởi `refund_amount_correct`, `pass_rate`, `reply_ledger_match`, `pass_hat_5` và cả ba slice.
+  - `fixed`, `honest_refactor`, và baseline so với chính nó: merge.
+- **Chống gian lận eval** (`integrity_check` + ratchet): chặn NaN/inf, số dòng ≠ items × seeds, dòng trùng, tập (item, seed) khác baseline, `evaluator_failures`, dòng thiếu giá trị metric, metric không khớp rows, đổi slice tag, và nới ngưỡng so với `--base-spec`. 4 trap công khai (`evaluator_errors_as_nan`, `dropped_failing_rows`, `cherry_picked_seeds`, `loosened_spec`) đều bị chặn.
+- **Giới hạn cỡ mẫu:** bug chỉ xuất hiện ở 1/3 seed (`rare`) không phát hiện ổn định với 5 seed, và ta không hạ ngưỡng để "bắt được" nó. Slice `adversarial` chỉ 14 item nên CI rộng. Không variant công khai nào làm fail item FM-09 (`cross_principal`), nên grader cho FM-09 chưa được kiểm chứng bằng lỗi thật.
+
