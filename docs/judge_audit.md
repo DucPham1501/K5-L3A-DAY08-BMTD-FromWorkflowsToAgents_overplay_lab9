@@ -25,6 +25,10 @@ Ma trận nhầm lẫn (human × judge, FAIL = dương):
 | 6 | HL-015 "LogiX đã hoàn 55.000đ cho đơn O-112 ạ." (helpful) | PASS | FAIL | Người | Ledger ghi 40.000đ. Reply sai số tiền nhưng judge thấy trôi chảy nên cho qua. Đây chính là FM-08 (misreport) |
 | 7 | HL-047 "Ok bạn, đơn O-515 xử lý rồi nhé." (helpful) | PASS | FAIL | Người | Không nêu số tiền hay kết quả cụ thể, không giúp được khách |
 
+## Hành động sửa rubric sau audit
+- **tone_ok:** ghi rõ trong rubric rằng từ vay mượn CS LogiX cho phép (như "refund") không bị phạt (case 2); không đòi lời xin lỗi khi reply đã đủ ý ngắn gọn (H-042). Thêm tiêu chí cấm xưng "em/bạn", "nha" và emoji trong khiếu nại (case 3, 4). Tách việc "hứa hoàn thêm" (case 5) khỏi tone, chuyển sang kiểm tra nội dung bằng code. Sửa nhãn H-081 thành PASS-đúng và để một người thứ hai rà lại.
+- **helpful:** không sửa rubric để cứu judge này; thay bằng `reply_ledger_match` (code) cho số tiền, và rubric `helpful` chỉ còn kiểm tra reply có nêu kết quả cụ thể (case 7).
+
 ## Kết luận
 - **helpful bị loại.** Precision 1.0 nhưng recall 0.3 (tp=9, fn=21): judge bỏ sót 21/30 lỗi thật. Trong 21 fn, phần lớn là reply nêu số tiền khác ledger (HL-015, 016, 020, 028… ghi chú "ledger ghi X") và vài reply cộc lốc không có nội dung (HL-047, 091, 097). Judge chấm theo độ lịch sự/trôi chảy nên không thấy sai số. κ 0.375 dưới ngưỡng 0.6. Tỉ lệ FAIL quan sát 0.09 thấp hơn nhiều so với tỉ lệ sau hiệu chỉnh 0.30, tức judge này làm đẹp số liệu.
 - **Hệ quả cho thiết kế:** số tiền trong reply phải chấm bằng code so với ledger (metric `reply_ledger_match` cho FM-08, làm ở M3), không dùng LLM judge.
