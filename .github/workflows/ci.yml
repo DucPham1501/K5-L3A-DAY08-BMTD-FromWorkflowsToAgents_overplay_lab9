@@ -14,9 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # macos-latest removed: its runners never get allocated for this repo
-        # (jobs sit queued ~15 min and are cancelled with 0 steps run).
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
         python: ["3.11", "3.13"]
     env:
       PYTHONUTF8: "1"
