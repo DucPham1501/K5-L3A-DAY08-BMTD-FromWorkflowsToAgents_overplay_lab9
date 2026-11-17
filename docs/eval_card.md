@@ -25,7 +25,7 @@ Card này đi kèm mỗi báo cáo và được dùng lại ở Day 10.
 - **Judge:** `tone_ok` n=100, κ=0.757, P=0.857, R=0.800 → đạt FLOORS, dùng được. `helpful` κ=0.375, P=1.0, R=0.3 → bị loại vì bỏ sót 21/30 lỗi, trong đó nhiều reply sai số tiền so với ledger; vì vậy FM-08 chấm bằng code (`reply_ledger_match`). Chi tiết: `docs/judge_audit.md`.
 - **Trace case:** `docs/trace_case.md` (C-002@11). Bước sai đầu tiên là event 3 `model_override {"delay_days": 5}` (FM-03). Regression test: `DbFactKept` + item E-002.
 - **Kiểm tra grader trên từng bug riêng** (5 seed × 14 claim): `misreport` có `pass_rate` 0.9857 (grader Lab 8 gần như bỏ sót) nhưng `reply_ledger_match` 0.8571 bắt được 10 trial; `sibling_refund` bị `approval_bypass` bắt (20 trial); `leaky_trace` bị 70/70.
-- **Gate owner:** người giữ eval (Eval owner trong PRD v1.1). Khi gate exit 1: không merge, đọc dòng BLOCK, chạy `python -m lab9.trace_case` cho claim@seed fail, sửa hoặc ghi waiver có lý do vào PR.
+- **Gate owner:** Phạm Đức Hồng Đức (Eval owner trong PRD v1.1, bài cá nhân). Khi gate exit 1: không merge, đọc dòng BLOCK, chạy `python -m lab9.trace_case` cho claim@seed fail, sửa hoặc ghi waiver có lý do vào PR.
 - **Phạm vi pilot:** yêu cầu hoàn tiền đơn lẻ của LogiX-VN trên dữ liệu công khai; chưa gồm claim nhiều đơn hay tranh chấp pháp lý.
 - **Giới hạn / bằng chứng còn thiếu:**
   - MockLLM: trace cố định theo seed, nên "5/5 seed" không chứng minh hành vi với model thật; latency không đo.
